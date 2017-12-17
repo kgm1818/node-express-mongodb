@@ -1,0 +1,55 @@
+{% extends './layout.html'%}
+
+{% block content1%}
+<h1>订单列表</h1>
+{% for orderitems in arrOeder %}
+<div class="sellerbox">
+    <img src="http://placehold.it/200x200" class="img-rounded">
+    <div class="seller">
+        <p class="username">用户昵称:{{orderitems.username}}</p>
+        <p class="description">商品名称:{{orderitems.goodsname}}</p>
+        <p class="styleSize">
+            <span>尺寸:{{orderitems.size}}</span>
+            <span>款式：{{orderitems.style}}</span>
+        </p>
+        <p class="sum">数量:{{orderitems.num}}</p>
+        <p class="totalPrice">单价:￥{{orderitems.price}}.00</p>
+        <p class="totalPrice">总价:￥{{orderitems.totalPrice}}.00</p>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
+
+{% block css%}
+<style>
+    .sellerbox{
+        margin-bottom: 25px;
+        overflow:hidden;
+        border: 1px solid #eee;
+        height: 180px;
+        padding: 10px;
+    }
+    .sellerbox .img-rounded{
+        display: block;
+        float: left;
+        border: 1px solid #eee;
+        max-width: 160px;
+        max-height: 160px;
+    }
+    .sellerbox .seller{
+        float: left;
+        margin-left: 20px;
+        font-size: 14px;
+        color: silver;
+        width: 43%;
+    }
+    .seller p{
+        margin-bottom: 7px;
+        text-overflow:ellipsis;
+        overflow: hidden;
+        width: 100%;
+        white-space: nowrap;
+    }
+</style>
+{% endblock %}
+

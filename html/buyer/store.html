@@ -1,0 +1,77 @@
+{% extends 'layout.html' %}
+{% block content1%}
+<h1 class="title">欢迎进驻万达商城!让我们携手共赢。</h1>
+{% for selleritems in storeArr %}
+<div class="sellerbox">
+   <a href="/storelist?sellerid={{selleritems._id.toString()}}" class="sellera">
+       <img src="{{selleritems.sellerlogo}}" alt="{{selleritems.sellername}}" class="img-circle">
+       <div class="seller">
+           <p class="sellername">{{selleritems.sellername}}</p>
+           <p class="seller_name">卖家：{{selleritems.sellername}}&nbsp;&nbsp;
+                <img src="/images/image/ICON.jpg" />
+               <span class="area">浙江&nbsp; .&nbsp;杭州</span>
+           </p>
+           <p class="seller_description">店铺描述:{{selleritems.description}}</p>
+           <p class="seller_sum">已售:{{selleritems.numAll}}件</p>
+           <p class="good-comt">好评率：{{parseInt(Math.random()*10)+90+parseInt(Math.random()*100)/100}}%</p>
+       </div>
+   </a>
+</div>
+{% endfor %}
+
+{% endblock %}
+{% block css%}
+<style>
+.title{
+    color: darkkhaki;
+    font-family: cursive;
+}
+    .sellerbox{
+        border-top: 1px solid #eee;
+        overflow: hidden;
+        padding: 10px 0 35px;
+    }
+   .sellerbox .sellera{
+       display: block;
+       text-decoration: none;
+   }
+    .sellerbox .img-circle{
+        max-width: 150px;
+        border: 1px solid #eee;
+        float: left;
+    }
+    .sellerbox .seller{
+        margin-top: 15px;
+        font-size: 16px;
+        float: left;
+        margin-left: 20px;
+        width: 50%;
+
+    }
+    .seller p{
+        width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        height: 20px;
+    }
+    .sellername{
+        color: #000;
+        font-size: 18px;
+    }
+    .seller_name{
+        font-size: 14px;
+        color: cadetblue;
+    }
+    .seller_name .area{
+        font-size: 12px;
+        color: #000;
+    }
+    .seller_description{
+        font-size: 14px;
+    }
+    .good-comt{
+        color: #000;
+    }
+</style>
+{% endblock %}

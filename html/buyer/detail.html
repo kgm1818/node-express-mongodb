@@ -1,0 +1,184 @@
+{% extends './layout.html' %}
+
+{% block content1 %}
+<h3>商品详情</h3>
+<div class="detail">
+    <img src="http://placehold.it/200x200" />
+    <h3 class="title">{{result.goodsname}}</h3>
+    <p class="description">{{result.description}}</p>
+   <p class="sizes">
+     {% for sizeslist in result.sizes %}
+      <span>{{sizeslist}}</span>
+     {% endfor %}
+   </p>
+  <p class="styles">
+    {% for styleslist in result.styles %}
+      <span>{{styleslist}}</span>
+    {% endfor %}
+  </p>
+    <p class="price">￥   {{result.price}}</p>
+    <p class="product-buy-quantity">
+        <label>数量：</label>
+        <span id="btn-decrease">-</span>
+        <input type="text" value="1" class="shop_num">
+        <span id="btn-increase">+</span>
+    </p>
+    <p class="sellername" data-sellerid="{{result.sellerId._id.toString()}}">{{result.sellerId.sellername}}</p>
+    <p class="buy" data-aid="{{result._id.toString()}}">购买</p>
+</div>
+<!--购买成功后弹出框-->
+<div id='msg'>
+    <div class='msg_title'>
+        提醒
+        <span class='x_close'>X</span>
+    </div>
+    <p class='success'> </p>
+    <!--购买失败的图标-->
+
+    <div class='choice'>
+        <a href='/goodslist' id='continue'>继续购买</a>
+        <a href='/personal'>进入个人中心</a>
+    </div>
+</div>
+
+<script src="/public/js/detail.js"></script>
+{% endblock %}
+{% block css%}
+   <style>
+       .price{
+           color: red;
+       }
+       .buy{
+           color: red;
+           font-size: 18px;
+           cursor: pointer;
+           width: 70px;
+           text-align: center;
+           line-height: 30px;
+           background: #5e5e5e;
+       }
+       .sizes span,.styles span{
+           display: inline-block;
+           padding: 3px;
+           border: 1px solid #eee;
+           cursor: pointer;
+       }
+
+       /*选中的款式*/
+       .sizes .check,.styles .check{
+            border-color:red;
+       }
+       .sizes .tb-check,.styles .tb-check{
+           border-color:red;
+           color: red;
+       }
+       .product-buy-quantity {
+           font-size: 12px;
+           overflow: hidden;
+           margin-bottom: 15px;
+       }
+       .product-buy-quantity label {
+           font-size: 14px;
+           display: inline-block;
+           float: left;
+           font-weight:normal;
+       }
+       .product-buy-quantity .shop_num {
+           max-width: 30px;
+           height: 23px;
+           line-height: 23px;
+           text-align: center;
+           border: 1px solid rgb(242, 242, 242);
+           float: left;
+           font-size: 14px;
+       }
+       .product-buy-quantity span {
+           width: 23px;
+           height: 23px;
+           display: inline-block;
+           background: #eee;
+           text-align: center;
+           line-height: 20px;
+           float: left;
+           font-size: 14px;
+           cursor: pointer;
+       }
+       /*//加入购物车弹出框*/
+       #msg{
+           width: 300px;
+           border: 1px solid #eee;
+           height: 150px;
+           background: #fff;
+           position: fixed;
+           left: 0;
+           top: 0;
+           right: 0;
+           bottom: 0;
+           margin: auto;
+           z-index: 2000;
+           box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+           display: none;
+       }
+       #msg .msg_title{
+           height: 45px;
+           padding: 0 15px;
+           background: #eee;
+           line-height: 45px;
+           font-size: 14px;
+       }
+       .msg_title .x_close{
+           font-size: 20px;
+           color: #DDDDDD;
+           float: right;
+           font-weight: bold;
+           cursor: pointer;
+           width: 30px;
+           text-align: center;
+       }
+       .msg_title .x_close:hover{
+           color: #484848;
+       }
+       #msg .success{
+           height: 20px;
+           line-height: 20px;
+           padding-left: 30px;
+           margin-top: 20px;
+           font-size: 14px;
+           text-align: center;
+           background: url('/images/image/success.jpg') no-repeat 93px center;
+           position: relative;
+       }
+       .erricon{
+           display: block;
+           position: absolute;
+           left: 94px;
+           top: 1px;
+           width: 16px;
+           height: 16px;
+           line-height: 16px;
+           text-align: center;
+           background: #eee;
+           border-radius: 50%;
+       }
+       #msg .choice{
+           margin-top: 15px;
+           overflow: hidden;
+           margin-left: 20px;
+       }
+       .choice a{
+           display: inline-block;
+           width: 130px;
+           height: 35px;
+           background: #ec3e7d;
+           color:#fff;
+           font-size: 14px;
+           text-align: center;
+           line-height: 35px;
+           text-decoration: none;
+       }
+       .choice a:hover{
+           text-decoration:none;
+       }
+   </style>
+
+{% endblock %}

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>卖家管理系统</title>
+    <style>
+        .form-group .relative{
+            position: relative;
+            border: 1px solid #eee;
+            padding: 6px 15px;
+            margin-right: 25px;}
+        .Close{
+            position: absolute;
+            font-size: 12px;
+            top: -12px;
+            right: -20px;
+            z-index: 2;
+            color: red;
+            border-radius: 50%;
+            border: 1px solid #eee;
+            width: 20px;
+            text-align: center;
+            height: 20px;
+            line-height: 20px;
+        }
+        /*//加入购物车弹出框*/
+        #msg{
+            width: 300px;
+            border: 1px solid #eee;
+            height: 150px;
+            background: #fff;
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            z-index: 2000;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+            display: none;
+        }
+        #msg .msg_title{
+            height: 45px;
+            padding: 0 15px;
+            background: #eee;
+            line-height: 45px;
+            font-size: 14px;
+        }
+        .msg_title .x_close{
+            font-size: 20px;
+            color: #DDDDDD;
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+            width: 30px;
+            text-align: center;
+        }
+        .msg_title .x_close:hover{
+            color: #484848;
+        }
+        #msg .success{
+            height: 20px;
+            line-height: 20px;
+            padding-left: 30px;
+            margin-top: 20px;
+            font-size: 14px;
+            text-align: center;
+            background: url('/images/image/success.jpg') no-repeat 93px center;
+            position: relative;
+        }
+        .erricon{
+            display: block;
+            position: absolute;
+            left: 94px;
+            top: 1px;
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            text-align: center;
+            background: #eee;
+            border-radius: 50%;
+        }
+        #msg .choice{
+            margin-top: 15px;
+            overflow: hidden;
+            margin-left: 20px;
+            text-align: center;
+        }
+        .choice a{
+            display: inline-block;
+            width: 130px;
+            height: 35px;
+            background: #ec3e7d;
+            color:#fff;
+            font-size: 14px;
+            text-align: center;
+            line-height: 35px;
+            text-decoration: none;
+        }
+        .choice a:hover{
+            text-decoration:none;
+        }
+
+    </style>
+    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="/public/js/bootstrap.min.js"></script>
+    <script src="/public/js/updatagoods.js"></script>
+</head>
+<body>
+<div class="container">
+    <h3>修改商品</h3>
+    <div>
+        <div class="form-group">
+            <label>商品名称</label>
+            <input type="text" class="form-control" placeholder="请输入用户名" id="goodsname" value="{{result.goodsname}}">
+        </div>
+        <div class="form-group">
+            <label>商品描述</label>
+            <textarea class="form-control" placeholder="请输入商品描述" id="description">{{result.description}}</textarea>
+        </div>
+        <div class="form-group">
+            <label>添加尺码</label>
+            <input type="text" class="form-control"  placeholder="请输入尺码" id="size">
+            <button class="btn btn-primary add" id="sizeAdd"  data-sizes="{{result.sizes}}">添加</button>
+            <br /><br />
+            {% for sizeitems in result.sizes %}
+            <span class="btn relative">{{sizeitems}}<span class="Close">X</span></span>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            <label>添加款式</label>
+            <input type="text" class="form-control"  placeholder="请输入款式" id="style">
+            <button class="btn btn-primary add" id="styleAdd" data-styles="{{result.styles}}">添加</button>
+            <br /><br />
+            {% for styleitems in result.styles %}
+            <span class="btn relative">{{styleitems}}<span class="Close">X</span></span>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            <label>添加价格</label>
+            <input type="number" class="form-control"  placeholder="请输入价格" id="price" value="{{result.price}}">
+            <button class="btn btn-primary">添加</button>
+        </div>
+        <button type="submit" class="btn btn-success btn-block" id="btn" data-id="{{result._id.toString()}}">修改</button>
+        <button type="button" class="btn btn-danger btn-block" id="cancel">取消</button>
+    </div>
+
+    <!--添加成功后的弹出框-->
+    <div id='msg'>
+        <div class='msg_title'>
+            提醒
+            <span class='x_close'>X</span>
+        </div>
+        <p class='success'> </p>
+        <!--添加失败的图标-->
+
+        <div class='choice'>
+            <a href='/admin/goodslist'>进入商品列表</a>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

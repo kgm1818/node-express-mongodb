@@ -1,0 +1,63 @@
+{% extends './layout.html'%}
+
+
+{% block content1%}
+<h1>商品列表</h1>
+
+    {% if isShow %}
+    <table class="table">
+        <tr>
+            <th>商品名称</th>
+            <th>尺寸</th>
+            <th>款式</th>
+            <th>价格</th>
+            <th>操作</th>
+        </tr>
+        {% for goodsObj in result %}
+        <tr>
+            <td>{{goodsObj.goodsname}}</td>
+            <td>
+                {% for sizeItems in goodsObj.sizes %}
+                {{sizeItems}} /
+                {% endfor %}
+            </td>
+            <td>
+                {% for styleItems in goodsObj.styles %}
+               {{styleItems}} /
+                {% endfor %}
+            </td>
+            <td>{{goodsObj.price}}</td>
+            <td>
+                <button type="button" class="btn btn-success" id="updata">
+                    <a href="/admin/updatagoods?goodsid={{goodsObj._id.toString()}}">修改</a></button>
+                <button type="button" class="btn btn-danger" id="delete" data-delete="{{goodsObj._id.toString()}}">
+                   删除
+                </button>
+            </td>
+        </tr>
+     {% endfor %}
+    </table>
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li class="{% if page<=1 %}disabled{% else %}''{% endif %}">
+                <a href="{{pre}}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% for index,objUrl in pageUrl %}
+            <li class="{{objUrl.class}}"><a href="{{objUrl.url}}">{{index+1}}</a></li>
+            {% endfor %}
+            <li>
+                <a href="{{next}}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    {% else %}
+    <p>你还没有添加商品，请添加</p>
+    {% endif %}
+<script src="/public/js/goodslist.js"></script>
+{% endblock %}

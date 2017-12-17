@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block content1%}
+<form action="/api/login" method="post">
+    <div class="form-group">
+        <label>用户名</label>
+        <input type="text" class="form-control" placeholder="请输入用户名" name="username">
+    </div>
+    <div class="form-group">
+        <label>密码</label>
+        <input type="password" class="form-control"  placeholder="请输入密码" name="password">
+    </div>
+    <button type="submit" class="btn btn-success btn-block">登录</button>
+    <button type="button" class="btn btn-danger btn-block">取消</button>
+</form>
+{% endblock %}
